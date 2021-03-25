@@ -1,0 +1,144 @@
+
+    <div class="dashboard-main-wrapper">
+        <div class="dashboard-wrapper">
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <!-- <h2 class="pageheader-title">Admin Dashboard</h2>
+                                <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p> -->
+                                <div class="page-breadcrumb custom-padding-breadcrumbs">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Admin</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ecommerce-widget">
+                        
+                        <ng-template #content let-modal>
+                            <form [formGroup]="createTestForm" (ngSubmit)="submitTestForm()" novalidate>
+                                <div class="modal-header">
+                                <h4 class="modal-title" id="modal-basic-title">Create Test</h4>
+                                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                            
+                                    <div class="form-group">
+                                        <label>Test title</label>
+                                        <input type="text" class="form-control" placeholder="Enter title" formControlName="title" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Test Description</label>
+                                        <input type="text" class="form-control" placeholder="Enter description" formControlName="description" required>
+                                    </div>
+
+                                    <h5>Select 4 questions to create a test.</h5>
+                                    
+                                    <div class="form-check" *ngFor="let question of questions">
+                                        <input class="form-check-input" type="checkbox" id={{question.serial_no}} formControlName={{question.serial_no}}>
+                                        <label class="form-check-label">
+                                            {{question.title}}
+                                        </label>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                <button type="submit" class="btn btn-outline-dark">Save</button>
+                                </div>
+                            </form>
+                          </ng-template>
+
+                        <div class="row">
+                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                                <div class="card" style="background-color: lightcyan;">
+                                    <div class="card-body">
+                                        <h5 class="text-muted custom-test-btn-padding">Create New Test</h5>
+                                        <a class="btn btn-outline-primary my-2 my-sm-0 mr-2" (click)="open(content)">Add New Test</a>
+                                    </div>
+                                    <div id="sparkline-revenue4"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                                <div class="card" style="background-color: aliceblue;">
+                                    <div class="card-body">
+                                        <h5 class="text-muted">Total Tests</h5>
+                                        <div class="metric-value d-inline-block">
+                                            <h1 class="mb-1">{{totalTests !== undefined && totalTests.length > 0 ?  totalTests.length : ''}}</h1>
+                                        </div>
+                                    </div>
+                                    <div id="sparkline-revenue"></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                                <div class="card" style="background-color: lightsteelblue;">
+                                    <div class="card-body">
+                                        <h5 class="text-muted">Total Results</h5>
+                                        <div class="metric-value d-inline-block">
+                                            <h1 class="mb-1">{{testsData !== undefined && testsData.length > 0 ?  testsData.length : ''}}</h1>
+                                        </div>
+                                    </div>
+                                    <div id="sparkline-revenue2"></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                                <div class="card" style="background-color: cornsilk;">
+                                    <div class="card-body">
+                                        <h5 class="text-muted">Total Questions</h5>
+                                        <div class="metric-value d-inline-block">
+                                            <h1 class="mb-1">8</h1>
+                                        </div>
+                                    </div>
+                                    <div id="sparkline-revenue3"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row custom-padding-recent-order">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="card">
+                                    <h5 class="card-header">Tests Data</h5>
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class="bg-light">
+                                                    <tr class="border-0">
+                                                        <th class="border-0">TestID</th>
+                                                        <th class="border-0">Test Title</th>
+                                                        <th class="border-0">Username</th>
+                                                        <th class="border-0">Result</th>
+                                                        <th class="border-0">Duration</th>
+                                                        <th class="border-0">Created At</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let test of testsData">
+                                                        <td>{{test._id}}</td>
+                                                        <td>{{test.test.title}}</td>
+                                                        <td>{{test.username}}</td>
+                                                        <td>{{test.result}}</td>
+                                                        <td>{{test.duration}} sec</td>
+                                                        <td>{{test.created_at}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

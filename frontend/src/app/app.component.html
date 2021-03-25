@@ -1,0 +1,9 @@
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" [routerLink]="['home']">Demo</a>
+    <form class="form-inline">
+      <a class="btn btn-outline-dark my-2 my-sm-0 mr-2" [routerLink]="['admin']">Admin Dashboard</a>
+      <a class="btn btn-outline-dark my-2 my-sm-0 mr-2" [routerLink]="['user']">User Panel</a>
+    </form>
+</nav>
+
+<router-outlet></router-outlet>

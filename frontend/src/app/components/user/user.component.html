@@ -1,0 +1,90 @@
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-header">
+                <!-- <h2 class="pageheader-title">Admin Dashboard</h2>
+                <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p> -->
+                <div class="page-breadcrumb custom-padding-breadcrumbs">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">User</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Panel</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+
+        <ng-template #content let-modal>
+            <form [formGroup]="submitTestForm" (ngSubmit)="submitTest()" novalidate>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Test ID: {{selectedTest.id}} </h4>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                   <h4 class="modal-title custom-timer-margin">Time: {{timer}} seconds</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" placeholder="Enter name" formControlName="name">
+                </div>
+
+                <div class="form-group">
+                  
+                    <div *ngFor="let question of testQuestions; let i = index">
+                        <div class="row">
+                        <p class="ml-2">Q. {{question.title}}?</p>
+                        </div>
+                       <div class="row custom-margin-question-options">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="inlineRadio1" value="0" formControlName="optionSelection{{i+1}}">
+                            <label class="form-check-label" for="inlineRadio1">{{question.options[0]}}</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="inlineRadio2" value="1" formControlName="optionSelection{{i+1}}">
+                            <label class="form-check-label" for="inlineRadio2">{{question.options[1]}}</label>
+                          </div>
+                         <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="inlineRadio2" value="2" formControlName="optionSelection{{i+1}}">
+                            <label class="form-check-label" for="inlineRadio2">{{question.options[2]}}</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="inlineRadio2" value="3" formControlName="optionSelection{{i+1}}">
+                            <label class="form-check-label" for="inlineRadio2">{{question.options[3]}}</label>
+                          </div>
+                        </div>
+                  </div>
+                  
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-outline-dark">Submit</button>
+            </div>
+        </form>
+          </ng-template>
+
+
+        <div class="col-lg-4 col-md-4 col-sm-12 custom-bottom-padding-card" *ngFor="let test of tests">
+            <div class="card text-center">
+                <div class="card-header">Test ID: {{test._id}}</div>
+                <div class="card-body">
+                <h5 class="card-title">{{test.title}}</h5>
+                <p class="card-text">
+                    {{test.description}}
+                </p>
+                <a class="btn btn-primary" (click)="modalData(test); open(content)">Solve</a>
+                </div>
+                <div class="card-footer text-muted">Created At: {{test.created_at}}</div>
+            </div>   
+        </div>
+
+  </div>
+
+  
